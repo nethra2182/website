@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmicaa — Space Tourism</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#6CF2FF;
+  --neutral:#0B0F1A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,sans-serif;
+  background:var(--neutral);
+  color:var(--primary);
+  overflow-x:hidden;
+}
+
+/* 🌌 SPACE BACKGROUND */
+.space{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  background:radial-gradient(circle at bottom,#0e1a2f,#05070f 70%);
+}
+
+/* ✨ STARS */
+.stars{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1px 1px at 20% 30%,#fff,transparent),
+    radial-gradient(1px 1px at 80% 40%,#fff,transparent),
+    radial-gradient(1px 1px at 50% 80%,#fff,transparent),
+    radial-gradient(2px 2px at 70% 20%,#6CF2FF,transparent);
+  animation: drift 120s linear infinite;
+  opacity:.6;
+}
+.stars2{animation-duration:180s;opacity:.4}
+.stars3{animation-duration:240s;opacity:.25}
+
+@keyframes drift{
+  from{transform:translateY(0)}
+  to{transform:translateY(-1000px)}
+}
+
+/* 🪐 PLANETS */
+.planet{
+  position:absolute;
+  border-radius:50%;
+  opacity:.85;
+}
+.planet-1{
+  width:260px;height:260px;
+  background:radial-gradient(circle at 30% 30%,#6CF2FF,#143a4a);
+  top:20%;left:-80px;
+  animation: float 28s ease-in-out infinite;
+}
+.planet-2{
+  width:180px;height:180px;
+  background:radial-gradient(circle at 30% 30%,#aaa,#222);
+  bottom:10%;right:-60px;
+  animation: float 34s ease-in-out infinite reverse;
+}
+
+/* 🌙 MOON */
+.moon{
+  width:90px;height:90px;
+  position:absolute;
+  top:15%;right:15%;
+  background:radial-gradient(circle at 30% 30%,#eee,#888);
+  border-radius:50%;
+  opacity:.8;
+  animation: float 22s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-40px)}
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  width:100%;
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:10;
+  backdrop-filter:blur(10px);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:1.4rem;
+  font-weight:700;
+  letter-spacing:2px;
+}
+.logo-mark{
+  width:28px;height:28px;
+  border:2px solid var(--primary);
+  border-radius:50%;
+  position:relative;
+}
+.logo-mark::before{
+  content:"";
+  position:absolute;
+  width:6px;height:6px;
+  background:var(--primary);
+  border-radius:50%;
+  animation:orbit 4s linear infinite;
+}
+@keyframes orbit{
+  from{transform:rotate(0deg) translateX(12px)}
+  to{transform:rotate(360deg) translateX(12px)}
+}
+
+.btn{
+  padding:12px 28px;
+  border-radius:30px;
+  border:none;
+  background:var(--primary);
+  color:var(--neutral);
+  font-weight:600;
+  cursor:pointer;
+  transition:.4s;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px var(--primary);
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:linear-gradient(
+    to bottom,
+    rgba(11,15,26,.65),
+    rgba(11,15,26,.95)
+  );
+  display:flex;
+  align-items:center;
+  padding:0 8%;
+}
+.hero h1{font-size:3.5rem}
+.hero p{max-width:520px;margin:20px 0 40px;opacity:.85}
+
+/* SECTIONS */
+section{padding:110px 8%}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+
+/* ASSURANCE */
+.assurance-box{
+  display:flex;
+  gap:22px;
+  align-items:flex-start;
+  border:1px solid rgba(108,242,255,.4);
+  background:rgba(108,242,255,.04);
+  padding:35px;
+  border-radius:30px;
+  max-width:900px;
+}
+
+/* CARDS */
+.card{
+  border:1px solid rgba(108,242,255,.3);
+  padding:40px;
+  border-radius:25px;
+  cursor:pointer;
+  transition:.6s;
+}
+.card:hover{
+  transform:translateY(-15px);
+  box-shadow:0 0 50px rgba(108,242,255,.4);
+}
+.price{font-size:1.8rem;margin-top:15px}
+
+.moon-card{
+  background:
+    linear-gradient(to top,rgba(11,15,26,.9),rgba(11,15,26,.95)),
+    url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa") center/cover;
+}
+
+/* SAFETY */
+.safety{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:30px;
+}
+.badge{
+  border:1px solid rgba(108,242,255,.4);
+  padding:16px 22px;
+  border-radius:30px;
+  font-size:.9rem;
+}
+
+/* REVIEWS */
+.review{
+  border-left:3px solid var(--primary);
+  padding-left:20px;
+  font-style:italic;
+  opacity:.9;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(11,15,26,.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal-content{
+  border:1px solid var(--primary);
+  padding:45px;
+  border-radius:30px;
+  width:90%;
+  max-width:520px;
+}
+input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  background:transparent;
+  border:1px solid var(--primary);
+  color:var(--primary);
+  border-radius:10px;
+}
+
+footer{text-align:center;padding:50px;opacity:.6}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.3rem}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌌 BACKGROUND -->
+<div class="space">
+  <div class="stars"></div>
+  <div class="stars stars2"></div>
+  <div class="stars stars3"></div>
+  <div class="planet planet-1"></div>
+  <div class="planet planet-2"></div>
+  <div class="moon"></div>
+</div>
+
+<nav>
+  <div class="logo"><span class="logo-mark"></span>COSMICAA</div>
+  <button class="btn" onclick="openJourney()">Begin</button>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>Space, Designed for Humans</h1>
+    <p>A premium space tourism experience built on safety, training, and trust.</p>
+    <button class="btn" onclick="openJourney()">Explore Missions</button>
+  </div>
+</section>
+
+<section class="assurance">
+  <div class="assurance-box">
+    🛡️
+    <div>
+      <h3>Safe Space, Guaranteed</h3>
+      <p>Every mission is medically cleared, pilot-certified, and insured.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+<h2>Destinations</h2><br>
+<div class="grid">
+  <div class="card" onclick="openDestination('Earth Orbit')">
+    <h3>Earth Orbit</h3>
+    <p>Watch Earth rise every 90 minutes.</p>
+    <div class="price">$250,000</div>
+  </div>
+  <div class="card moon-card" onclick="openDestination('Moon Flyby')">
+    <h3>Moon Flyby</h3>
+    <p>The far side of the Moon.</p>
+    <div class="price">$1,200,000</div>
+  </div>
+  <div class="card" onclick="openDestination('Deep Space')">
+    <h3>Deep Space</h3>
+    <p>Beyond Earth’s gravity.</p>
+    <div class="price">$4,800,000</div>
+  </div>
+</div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<footer>©️ 2026 Cosmicaa — Space Tourism UI Concept</footer>
+
+<script>
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modalContent");
+
+function openJourney(){
+  modalContent.innerHTML = `
+    <h2>Your Space Journey</h2><br>
+    <input placeholder="Full Name">
+    <input placeholder="Email">
+    <input placeholder="Phone">
+    <input placeholder="Preferred Destination">
+    <button class="btn" onclick="closeModal()">Submit</button>
+  `;
+  modal.style.display="flex";
+}
+function openDestination(place){
+  modalContent.innerHTML = `
+    <h2>${place}</h2><br>
+    <input placeholder="Full Name">
+    <input placeholder="Email">
+    <button class="btn" onclick="closeModal()">Submit</button>
+  `;
+  modal.style.display="flex";
+}
+function closeModal(){
+  modal.style.display="none";
+}
+
+/* 🧭 PARALLAX */
+document.addEventListener("mousemove", e=>{
+  const x = (e.clientX / window.innerWidth - .5) * 20;
+  const y = (e.clientY / window.innerHeight - .5) * 20;
+  document.querySelector(".planet-1").style.transform = `translate(${x}px,${y}px)`;
+  document.querySelector(".planet-2").style.transform = `translate(${-x}px,${-y}px)`;
+});
+</script>
+
+</body>
+</html>
